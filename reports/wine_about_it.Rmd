@@ -1,0 +1,38 @@
+---
+title: "Wine About It Why Doncha"
+author: "Evan"
+date: "01/03/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# set root to rproj root
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+library(tidyverse)
+library(readxl)
+
+```
+
+
+## The Quest for the Best
+
+Using data acquired during a night of garlic breath and shots of wine, we were tasked with finding the preferred red and white wine.
+
+Below is a glimpse of the dataset.
+
+```{r cars}
+# read the data
+wines_df  <- read_xlsx("data/garlic_games_wine_tasting.xlsx", sheet = "wine_tasting")
+head(wines_df, 10)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
