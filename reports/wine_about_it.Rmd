@@ -44,17 +44,48 @@ p <- wines_df %>%
         theme_bw() + 
         theme(axis.text.x = element_text(angle = 30, hjust = 1)) + 
         coord_flip() + 
-        labs(x = "Rating out of 20", y = "Wine Name", title = "Distribution of Wine Ratings by Type")
+        labs(y = "Rating out of 20", x = "Wine Name", title = "Distribution of Wine Ratings by Type")
 
 ggplotly(p)
 ```
 
 
+## Boxplots of People
+
+Do people tend to vote a certain way?
+
+```{r echo=FALSE}
 
 
+p <- wines_df %>% 
+        ggplot(aes(x = wine_tester, y = rating, text = comments)) + 
+        geom_boxplot() + 
+        geom_point() + 
+        scale_y_continuous(limits = c(0, 20)) + 
+        scale_fill_manual(values = c("#bf180a", "#ccc6c6")) + 
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+        labs(y = "Rating out of 20", x = "Person", title = "Distribution of Wine Ratings by Person") 
+
+ggplotly(p)
+```
+
+How about by colour by person?
+
+```{r echo=FALSE}
 
 
+p <- wines_df %>% 
+        ggplot(aes(x = wine_tester, y = rating, text = comments, fill = colour)) + 
+        geom_boxplot() + 
+        geom_point() + 
+        scale_y_continuous(limits = c(0, 20)) + 
+        scale_fill_manual(values = c("#bf180a", "#ccc6c6")) + 
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+        labs(y = "Rating out of 20", x = "Person", title = "Distribution of Wine Ratings by Person") +
+        facet_grid(.~colour)
 
-
-
+ggplotly(p)
+```
 
