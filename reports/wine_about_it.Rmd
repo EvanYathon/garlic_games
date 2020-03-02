@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 library(tidyverse)
 library(readxl)
-
+library(plotly)
 ```
 
 
@@ -24,15 +24,37 @@ Below is a glimpse of the dataset.
 ```{r cars}
 # read the data
 wines_df  <- read_xlsx("data/garlic_games_wine_tasting.xlsx", sheet = "wine_tasting")
-head(wines_df, 10)
+sample_n(wines_df, 10) %>% 
+        knitr::kable()
 ```
 
-## Including Plots
+## Boxplots of Ratings
 
-You can also embed plots, for example:
+The spread of ratings are shown below, using a boxplot to show the range of ratings for each wine.  Hover values show individual scoring, along with comments.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r echo=FALSE}
+
+
+p <- wines_df %>% 
+        ggplot(aes(x = fct_reorder(wine_name, colour), y = rating, text = comments, fill = colour)) + 
+        geom_boxplot() + 
+        geom_point() + 
+        scale_y_continuous(limits = c(0, 20)) + 
+        scale_fill_manual(values = c("#bf180a", "#ccc6c6")) + 
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 30, hjust = 1)) + 
+        coord_flip() + 
+        labs(x = "Rating out of 20", y = "Wine Name", title = "Distribution of Wine Ratings by Type")
+
+ggplotly(p)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+
+
+
+
