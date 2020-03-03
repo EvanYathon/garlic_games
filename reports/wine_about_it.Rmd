@@ -89,3 +89,41 @@ p <- wines_df %>%
 ggplotly(p)
 ```
 
+## Regression
+
+Estimation of wine and person effect on score - try two different models:
+
+1) Only wines: Y = X0 + B1X1
+   - Y = rating
+   - X0 = intercept
+   - B1 = effect of wine type on rating (a slope)
+   - X1 = wine types
+2) Only people: Y = X0 + B2X2
+   - B2 = effect of person on rating (a slope)
+   - X2 = people
+
+
+### Linear Model #1
+
+```{r}
+wines_only_lm <- lm(rating ~ wine_name, data = wines_df)
+
+summary(wines_only_lm)
+```
+
+Black Shook Shiraz and San Pedro 1865 Cab Sav are the only ones with a positive slope; note that everything is compared to the reference group, 14 Hands Merlot.  Also under the p-value significance assumption of 0.05, no findings are sigificant.  This is to be expected from a small sample size such as this one.
+
+### Linear Model #2
+
+```{r}
+wines_people_lm <- lm(rating ~  wine_tester, data = wines_df)
+
+summary(wines_people_lm)
+```
+
+This one is quite funny - Adam is the reference group for people so all Estimates are in reference to him.  As everyone has a negative coefficient (Estimate column), we are all wine snobs compared to Adam.
+
+This time there are a few significant results (noted by the * or **).  It seems that Carly and Kait are statistically significant wine snobs when compared to Adam.
+
+
+## Conclusion
