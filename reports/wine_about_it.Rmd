@@ -49,6 +49,15 @@ p <- wines_df %>%
 ggplotly(p)
 ```
 
+Black Shook seems to do very well with little spread; except for a single anomalous rating.  Who was it?
+
+```{r}
+wines_df %>% 
+        filter(wine_name == "Black Shook Shiraz", rating < 10) %>% 
+        knitr::kable()
+```
+
+
 
 ## Boxplots of People
 
@@ -125,5 +134,10 @@ This one is quite funny - Adam is the reference group for people so all Estimate
 
 This time there are a few significant results (noted by the * or **).  It seems that Carly and Kait are statistically significant wine snobs when compared to Adam.
 
+**Note that these models have not been checked to see if they are valid.  I highly doubt they are, there are likely several confounding factors like level of drunkenness through the night, or how full they were after eating massive quantities of garlic bread.**
 
 ## Conclusion
+
+The regression models and the boxplots seem to tell the same story; Black Chook Shiraz is consistently the top quality red wine with minimal variance (minus the outlier point).
+
+For the white wines, both seem to have scores hovering around the same area; but the Santa Margherita has much less spread.  I would interpret this as the wine was equally pleasing to the majority of people.  Assuming that our sample represents the wedding population, this would be a good and consistent wine.
